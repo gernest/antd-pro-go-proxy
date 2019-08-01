@@ -16,6 +16,9 @@ func main() {
 	app.Usage = "a backend web server for antd-pro"
 	app.Action = func(ctx *cli.Context) error {
 		port := ctx.Int("port")
+		if port == 0 {
+			port = 1212
+		}
 		h := api.Service()
 		log.Printf("starting server at http://localhost:%d\n", port)
 		return http.ListenAndServe(fmt.Sprintf(":%d", port), h)
